@@ -1,34 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: props.initialCount };
-  }
-
-  increment = () => {
-    this.setState((prevState) => ({
-      count: prevState.count + 1,
-    }));
+function LikeButton({ direction, initialCount }) {
+  const [count, setCount] = useState(initialCount);
+  const increment = () => {
+    setCount((prevCount) => prevCount + 1);
   };
 
-  render() {
-    const { count } = this.state;
-    const { direction } = this.props;
+  const title = direction === "up" ? "+1" : "-1";
 
-    const title = direction === "up" ? "+1" : "-1";
-
-    return (
-      <button
-        className="btn btn-default"
-        title={title}
-        onClick={this.increment}
-      >
-        {count} <i className={`glyphicon glyphicon-thumbs-${direction}`}></i>
-      </button>
-    );
-  }
+  return (
+    <button className="btn btn-default" title={title} onClick={increment}>
+      {count} <i className={`glyphicon glyphicon-thumbs-${direction}`}></i>
+    </button>
+  );
 }
 
 LikeButton.propTypes = {
