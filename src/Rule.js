@@ -1,39 +1,61 @@
 import React from "react";
+import classnames from "classnames";
 import Tag from "./Tag";
+import LikeButton from "./LikeButton";
 
-function Rule({ rule }) {
-  return (
-    <div className="panel panel-primary">
-      <div className="panel-heading" role="presentation">
-        {rule.title}
-        <i className="pull-right glyphicon glyphicon-chevron-down"></i>
-      </div>
-      <div className="panel-body">
-        <p>{rule.description}</p>
-      </div>
-      <div className="panel-footer">
-        <div className="btn-toolbar">
-          {rule.tags.map((tag) => (
-            <Tag tag={tag} key={tag} />
-          ))}
-          <div className="btn-group btn-group-xs pull-right">
-            <a className="btn btn-primary" title="Update" href="/">
-              <i className="glyphicon glyphicon-pencil"></i>
-            </a>
-          </div>
-          <div className="btn-group btn-group-xs pull-right">
-            <button className="btn btn-default" title="+1">
-              {rule.likes} <i className="glyphicon glyphicon-thumbs-up"></i>
-            </button>
-            <button className="btn btn-default" title="-1">
-              {rule.dislikes}{" "}
-              <i className="glyphicon glyphicon-thumbs-down"></i>
-            </button>
+class Rule extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { folded: !props.rule.description };
+  }
+
+  toggleDescription = () => {
+    this.setState((prevState) => ({
+      folded: !prevState.folded,
+    }));
+  };
+
+  render() {
+    const { rule } = this.props;
+    const { folded } = this.state;
+
+    return (
+      <div className="panel panel-primary">
+        <div
+          className="panel-heading"
+          role="presentation"
+          onClick={this.toggleDescription}
+        >
+          {rule.title}
+          <i
+            className={classnames(
+              "pull-right glyphicon",
+              folded ? "glyphicon-chevron-up" : "glyphicon-chevron-down"
+            )}
+          ></i>
+        </div>
+        <div className={classnames("panel-body", { hidden: folded })}>
+          <p>{rule.description}</p>
+        </div>
+        <div className="panel-footer">
+          <div className="btn-toolbar">
+            {rule.tags.map((tag) => (
+              <Tag tag={tag} key={tag} />
+            ))}
+            <div className="btn-group btn-group-xs pull-right">
+              <a className="btn btn-primary" title="Update" href="/">
+                <i className="glyphicon glyphicon-pencil"></i>
+              </a>
+            </div>
+            <div className="btn-group btn-group-xs pull-right">
+              <LikeButton initialCount={rule.likes} />
+              <LikeButton initialCount={rule.dislikes} direction="down" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Rule;
