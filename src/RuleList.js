@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Rule from "./Rule";
 
-function RuleList({ rules }) {
+function RuleList({ rules, fetchRules }) {
+  useEffect(() => fetchRules(), [fetchRules]);
+
   return (
     <div>
       {rules.map((rule) => (
