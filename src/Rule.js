@@ -3,6 +3,7 @@ import classnames from "classnames";
 import Tag from "./Tag";
 import LikeButton from "./LikeButton";
 import LikeButtonContainer from "./LikeButtonContainer";
+import { Link } from "react-router-dom";
 
 class Rule extends React.Component {
   constructor(props) {
@@ -44,9 +45,13 @@ class Rule extends React.Component {
               <Tag tag={tag} key={tag} />
             ))}
             <div className="btn-group btn-group-xs pull-right">
-              <a className="btn btn-primary" title="Update" href="/">
+              <Link
+                className="btn btn-primary"
+                title="Update"
+                to={`/edit/${rule.id}`}
+              >
                 <i className="glyphicon glyphicon-pencil"></i>
-              </a>
+              </Link>
             </div>
             <div className="btn-group btn-group-xs pull-right">
               <LikeButtonContainer id={rule.id} direction="up" />
