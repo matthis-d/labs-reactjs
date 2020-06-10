@@ -36,6 +36,11 @@ describe("rules reducer", () => {
       { id: 2, likes: 23 },
       { id: 3, likes: 32 },
     ]);
+    expect(previousState).toEqual([
+      { id: 1, likes: 12 },
+      { id: 2, likes: 22 },
+      { id: 3, likes: 32 },
+    ]);
   });
 
   it("should handle DO_DISLIKE", () => {

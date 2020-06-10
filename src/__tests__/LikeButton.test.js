@@ -4,8 +4,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import LikeButton from "../LikeButton";
 
 describe("LikeButton component", () => {
+  let onClick;
   beforeEach(() => {
-    render(<LikeButton initialCount={3} />);
+    onClick = jest.fn();
+    render(<LikeButton initialCount={3} onClick={onClick} />);
   });
 
   it("should display a button with +1 as a title", () => {
@@ -16,8 +18,8 @@ describe("LikeButton component", () => {
     expect(screen.getByRole("button")).toHaveTextContent("3");
   });
 
-  it("should increment count on click", () => {
+  it("should call onClick prop on click", () => {
     fireEvent.click(screen.getByTitle("+1"));
-    expect(screen.getByRole("button")).toHaveTextContent("4");
+    expect(onClick).toHaveBeenCalled();
   });
 });

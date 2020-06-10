@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import Tag from "./Tag";
 import LikeButton from "./LikeButton";
+import LikeButtonContainer from "./LikeButtonContainer";
 
 class Rule extends React.Component {
   constructor(props) {
@@ -48,8 +49,8 @@ class Rule extends React.Component {
               </a>
             </div>
             <div className="btn-group btn-group-xs pull-right">
-              <LikeButton initialCount={rule.likes} />
-              <LikeButton initialCount={rule.dislikes} direction="down" />
+              <LikeButtonContainer id={rule.id} direction="up" />
+              <LikeButtonContainer id={rule.id} direction="down" />
             </div>
           </div>
         </div>
