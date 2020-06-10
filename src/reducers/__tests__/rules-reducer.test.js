@@ -28,7 +28,7 @@ describe("rules reducer", () => {
 
     const action = {
       type: "DO_LIKE",
-      payload: 2,
+      payload: { id: 2, likes: 23 },
     };
 
     expect(rulesReducer(previousState, action)).toEqual([
@@ -52,7 +52,7 @@ describe("rules reducer", () => {
 
     const action = {
       type: "DO_DISLIKE",
-      payload: 2,
+      payload: { id: 2, dislikes: 23 },
     };
 
     expect(rulesReducer(previousState, action)).toEqual([

@@ -6,24 +6,13 @@ export function rulesReducer(currentRules = [], action) {
     case RULES_LOADED:
       return action.payload;
 
-    case DO_LIKE: {
-      return currentRules.map((rule) => {
-        if (rule.id === action.payload) {
-          return {
-            ...rule,
-            likes: rule.likes + 1,
-          };
-        }
-        return rule;
-      });
-    }
-
+    case DO_LIKE:
     case DO_DISLIKE: {
       return currentRules.map((rule) => {
-        if (rule.id === action.payload) {
+        if (rule.id === action.payload.id) {
           return {
             ...rule,
-            dislikes: rule.dislikes + 1,
+            ...action.payload,
           };
         }
         return rule;
