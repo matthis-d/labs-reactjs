@@ -4,7 +4,10 @@ import { loadRule } from "./actions/rules-actions";
 
 const mapStateToProps = (state, props) => {
   return {
-    rule: state.rules.find((rule) => rule.id === props.match.params.id) || {},
+    rule:
+      state.rules.find(
+        (rule) => rule.id === parseInt(props.match.params.id, 10)
+      ) || {},
   };
 };
 
